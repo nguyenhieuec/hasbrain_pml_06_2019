@@ -18,9 +18,6 @@ from tqdm import tnrange, tqdm_notebook
 
 logging.basicConfig(filename="crawlfulltext.log",level=logging.ERROR)
 
-news_url = pd.read_csv("aapl.csv", usecols = range(0,2), encoding='latin-1')
-
-
 def get_details_from_url(df_to_get):
     data_dicts = []
     for url in tqdm(df_to_get['url'].values):
@@ -40,7 +37,13 @@ def get_details_from_url(df_to_get):
             continue
     return data_dicts
 
+for item in tqdm(["aapl.csv","amzn.csv","fb.csv","googl,csv","msft.csv"]):
+    news_url = pd.read_csv(item, usecols = range(0,2), encoding='latin-1')
+    filename = item.split(".")[1]
+    pd.DataFrame(get_details_from_url(news_url)).to_csv(filename + 'news.csv')
 
 
-aapl = pd.DataFrame(get_details_from_url(news_url))
-aapl.to_csv("aapl.csv")
+
+
+
+
