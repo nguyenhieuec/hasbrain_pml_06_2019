@@ -37,9 +37,9 @@ def get_details_from_url(df_to_get):
             continue
     return data_dicts
 
-for item in tqdm(["aapl.csv","amzn.csv","fb.csv","googl,csv","msft.csv"]):
+for item in tqdm(["aapl.csv","amzn.csv","fb.csv","googl.csv","msft.csv"]):
     news_url = pd.read_csv(item, usecols = range(0,2), encoding='latin-1')
-    filename = item.split(".")[1]
+    filename = item.split(".")[0]
     pd.DataFrame(get_details_from_url(news_url)).to_csv(filename + 'news.csv')
 
 
